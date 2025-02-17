@@ -33,11 +33,11 @@ notes: 可能有些路径需要自己设置下；同时主要用于学习，可�
 2. 基模: qwen2.5 1.5b BASE
 3. 训练数据: prm800k数据集
 4. prm800k运行流程
-- prm800k数据预处理: matho1/inference/prm800k/prm_dataset.py： prod Defaults to False. 有多条路径只选择一条，True多个选项会进行组合
+- prm800k数据预处理，用于训练reward model: matho1/inference/prm800k/prm_dataset.py： prod Defaults to False. 有多条路径只选择一条，True多个选项会进行组合
 - few shot方式产生generator sft训练数据集: matho1/inference/prm800k/fewshot_4gensft.py
 - generator sft: matho1/scripts/sft_prm.py
-- 使用训练的generator采样生成prm reward训练数据: matho1/inference/prm800k/gen_mathslu.py，同时也可以用来采样测试数据集
-- prm reward model训练: matho1/scripts/nexttok_prm_trainer.py, PRMs are trained for 2 epochs. On smaller datasets (such as in phase 1 and the first few generations of phase 2) this improves the final performance over training for just 1 epoch
+- 使用训练的generator采样测试数据集: matho1/inference/prm800k/gen_mathslu.py
+- 使用prm800k数据，prm reward model训练: matho1/scripts/nexttok_prm_trainer.py, PRMs are trained for 2 epochs. On smaller datasets (such as in phase 1 and the first few generations of phase 2) this improves the final performance over training for just 1 epoch
 - using process reward model to rank the generator sampling on test dataset: matho1/scripts/prm_rank.py
 - 统计评测: matho1/scripts/gpstate_ranker_score
 评测结果: 没有majority voting效果好
@@ -50,7 +50,6 @@ strategies such as best-of-N sampling. We hypothesize that this is likely a resu
 next: 所以按照Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters方式构建MATH-SHEPHERD数据集
 
 三  MATH-SHEPHERD数据构建流程
-- prm800k数据预处理: matho1/inference/prm800k/prm_dataset.py
 - few shot方式产生generator sft训练数据集: matho1/inference/prm800k/fewshot_4gensft.py
 - generator sft: matho1/scripts/sft_prm.py------这里也不一定要微调，没空做对比实验了
 - 使用训练的generator采样生成prm reward训练数据 matho1/inference/prm800k/gen_mathslu.py，同时也可以用来采样测试数据集
