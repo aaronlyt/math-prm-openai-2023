@@ -49,6 +49,12 @@ strategies such as best-of-N sampling. We hypothesize that this is likely a resu
 
 next: 所以按照Scaling LLM Test-Time Compute Optimally can be More Effective than Scaling Model Parameters方式构建MATH-SHEPHERD数据集
 
+1.5b base 4-shot采样的相关观察
+- prompt格式影响很大,
+- 很多问题无法生成正确答案的cot
+- 模型的输出也需要更多的解析
+
+
 三  MATH-SHEPHERD数据构建流程
 - few shot方式产生generator sft训练数据集: matho1/inference/prm800k/fewshot_4gensft.py
 - generator sft: matho1/scripts/sft_prm.py------这里也不一定要微调，没空做对比实验了
